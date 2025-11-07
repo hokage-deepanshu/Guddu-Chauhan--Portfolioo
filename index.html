@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepanshu Tomar | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        /* Base font */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        }
+        
+        /* Smooth scrolling 'main' par zaroori nahi hai, 
+           kyunki JavaScript ise handle karega. 
+           Lekin 'html' par add kar dete hain.
+        */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Background Blob Animations */
+        @keyframes pulse-delay {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.2); }
+        }
+        @keyframes pulse-delay-2 {
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        @keyframes pulse-delay-3 {
+            0%, 100% { opacity: 0.4; transform: scale(1.1); }
+            50% { opacity: 0.7; transform: scale(0.9); }
+        }
+        .animate-pulse-delay { animation: pulse-delay 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .animate-pulse-delay-2 { animation: pulse-delay-2 10s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .animate-pulse-delay-3 { animation: pulse-delay-3 9s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        
+        /* Panel Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .content-panel {
+             animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* Hide scrollbar for the main panels container */
+        main::-webkit-scrollbar {
+            display: none;
+        }
+        main {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Typewriter Animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #8b5cf6; } /* Purple caret */
+        }
+        .typewriter h2 { /* Matches the H2 tag */
+            display: inline-block; 
+            overflow: hidden; 
+            white-space: nowrap; 
+            border-right: 4px solid #8b5cf6; 
+            width: 0; 
+            animation: 
+                typing 1.5s steps(26, end) 0.5s forwards,
+                blink 0.75s step-end infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-900/70 text-gray-100">
+
+    <div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div class="absolute top-0 -left-1/4 w-96 h-96 lg:w-[32rem] lg:h-[32rem] bg-purple-600 rounded-full mix-blend-lighten filter blur-3xl opacity-60 animate-pulse-delay"></div>
+        <div class="absolute bottom-0 -right-1/4 w-96 h-96 lg:w-[32rem] lg:h-[32rem] bg-cyan-500 rounded-full mix-blend-lighten filter blur-3xl opacity-50 animate-pulse-delay-2"></div>
+        <div class="absolute top-1/3 left-1/3 w-80 h-80 lg:w-[28rem] lg:h-[28rem] bg-pink-500 rounded-full mix-blend-lighten filter blur-3xl opacity-40 animate-pulse-delay-3"></div>
+    </div>
+
+    <div class="relative min-h-screen flex flex-col md:flex-row">
+        
+        <nav class="hidden md:flex flex-col items-center gap-6 p-6 
+                       bg-black/20 backdrop-blur-lg border-r border-white/10">
+            <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                GC
+            </div>
+            <div class="flex flex-col gap-4 mt-8">
+                <button data-target="home-panel" class="nav-button desktop-nav-button active-nav-button flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300 w-20 bg-purple-600 text-white" title="Home">
+                    <i data-lucide="home" class="w-6 h-6"></i>
+                    <span class="text-xs mt-1">Home</span>
+                </button>
+                <button data-target="about-panel" class="nav-button desktop-nav-button flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300 w-20 text-gray-400 hover:bg-white/10 hover:text-white" title="About">
+                    <i data-lucide="user" class="w-6 h-6"></i>
+                    <span class="text-xs mt-1">About</span>
+                </button>
+                <button data-target="skills-panel" class="nav-button desktop-nav-button flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300 w-20 text-gray-400 hover:bg-white/10 hover:text-white" title="Skills">
+                    <i data-lucide="wrench" class="w-6 h-6"></i>
+                    <span class="text-xs mt-1">Skills</span>
+                </button>
+                <button data-target="experience-panel" class="nav-button desktop-nav-button flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300 w-20 text-gray-400 hover:bg-white/10 hover:text-white" title="Experience">
+                    <i data-lucide="briefcase" class="w-6 h-6"></i>
+                    <span class="text-xs mt-1">Experience</span>
+                </button>
+                <button data-target="education-panel" class="nav-button desktop-nav-button flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300 w-20 text-gray-400 hover:bg-white/10 hover:text-white" title="Education">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                    <span class="text-xs mt-1">Education</span>
+                </button>
+                <button data-target="achievements-panel" class="nav-button desktop-nav-button flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-300 w-20 text-gray-400 hover:bg-white/10 hover:text-white" title="Achievements">
+                    <i data-lucide="trophy" class="w-6 h-6"></i>
+                    <span class="text-xs mt-1">Achievements</span>
+                </button>
+            </div>
+        </nav>
+
+        <nav class="md:hidden fixed bottom-0 w-full p-2 z-50
+                       bg-black/30 backdrop-blur-lg border-t border-white/10">
+            <div class="flex justify-around">
+                <button data-target="home-panel" class="nav-button mobile-nav-button active-nav-button-mobile flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 text-purple-400" title="Home">
+                    <i data-lucide="home" class="w-5 h-5"></i>
+                    <span class="text-xs mt-1">Home</span>
+                </button>
+                <button data-target="about-panel" class="nav-button mobile-nav-button flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 text-gray-400" title="About">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                    <span class="text-xs mt-1">About</span>
+                </button>
+                <button data-target="skills-panel" class="nav-button mobile-nav-button flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 text-gray-400" title="Skills">
+                    <i data-lucide="wrench" class="w-5 h-5"></i>
+                    <span class="text-xs mt-1">Skills</span>
+                </button>
+                <button data-target="experience-panel" class="nav-button mobile-nav-button flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 text-gray-400" title="Experience">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i>
+                    <span class="text-xs mt-1">Experience</span>
+                </button>
+                <button data-target="education-panel" class="nav-button mobile-nav-button flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 text-gray-400" title="Education">
+                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                    <span class="text-xs mt-1">Education</span>
+                </button>
+                <button data-target="achievements-panel" class="nav-button mobile-nav-button flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-300 w-16 text-gray-400" title="Achievements">
+                    <i data-lucide="trophy" class="w-5 h-5"></i>
+                    <span class="text-xs mt-1">Achievements</span>
+                </button>
+            </div>
+        </nav>
+
+        <main class="flex-1 p-6 md:p-12 pb-24 md:pb-12 overflow-y-auto">
+            <div class="w-full max-w-6xl mx-auto flex flex-col gap-8 md:gap-12">
+                
+                <div id="home-panel" class="content-panel tilt-panel floating-panel p-6 md:p-8 bg-white/5 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+                    <div class="flex flex-col md:flex-row items-center justify-center md:justify-around text-center md:text-left min-h-[70vh]">
+                        <div class="flex-shrink-0">
+                            <img id="profile-pic" src="WhatsApp Image 2025-11-06 at 11.24.14_9f93cbcc.jpg" alt="Profile Picture" class="tilt-card w-48 h-48 md:w-72 md:h-72 rounded-full object-cover border-4 border-purple-500 shadow-lg cursor-pointer"/>
+                        </div>
+                        <div class="relative mt-8 md:mt-0 md:ml-12">
+                            <div class="typewriter text-center md:text-left">
+                                <h2 class="text-4xl md:text-6xl font-bold">Hi, I'm Guddu Chauhan </h2>
+                                <p class="text-xl md:text-2xl text-gray-300 mt-2">Leader | Innovator | Entrepreneur</p>
+                            </div>
+                            <button id="contact-button" class="mt-6 px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors shadow-lg">
+                                Contact Info
+                            </button>
+                            <div id="contact-card" class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 md:left-0 md:translate-x-0 bg-gray-900/80 backdrop-blur-lg border border-white/20 text-white rounded-lg shadow-2xl p-4 z-10 text-left panel-fade-in">
+                                <button id="close-contact-card" class="absolute top-2 right-2 text-gray-400 hover:text-white">&times;</button>
+                                <h3 class="text-lg font-bold mb-3 text-purple-300">Contact Info</h3>
+                                <p class="text-sm mb-1"><strong>Email:</strong> chauhanguddu.4142@gmail.com</p>
+                                <p class="text-sm mb-1"><strong>Phone:</strong> +91 75059 69473</p>
+                                <p class="text-sm mb-1"><strong>Location:</strong> Greater Noida , Uttar Pradesh, India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="about-panel" class="content-panel tilt-panel floating-panel p-6 md:p-8 bg-white/5 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+                    <div class="flex flex-col justify-center">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-purple-300">About Me</h2>
+                        <p class="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl">
+                            I’m Guddu Chauhan, an innovator at heart and the CEO of Infyra Innovations LLP. I’m passionate about creating technology that truly makes a difference—especially in the lives of farmers. Through our flagship project, Kisan Drishti, my team and I are building smart solutions powered by AI, IoT, and drone technology to make farming more efficient, data-driven, and sustainable.
+                            <br/><br/>
+                            For me, innovation isn’t just about technology—it’s about solving real-problems with purpose. I believe in leading with vision, empowering my team, and building an ecosystem where ideas grow into impactful solutions. Every project I take on is driven by one goal: to make technology more human, accessible, and meaningful for everyone.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="skills-panel" class="content-panel tilt-panel floating-panel p-6 md:p-8 bg-white/5 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-purple-300">My Skills</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-6 border border-white/10">
+                            <h3 class="text-2xl font-semibold mb-6 text-gray-100">Technical Skills</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Artificial Intelligence</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Internet of Things (IoT)</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Drone Technology & Automation</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Cloud Computing</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Data Analytics</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Product Design & System Integration</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Research & Development</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Hydrogen Fuel Research</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Smart Agriculture Technology</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Prototype Development & Testing</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Technical Documentation & IP Management</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Professional Strengths</span>
+                                <span class="bg-purple-600/50 text-purple-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-purple-400/50">Visionary Thinking & Problem Solving </span>
+                            </div>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-6 border border-white/10">
+                            <h3 class="text-2xl font-semibold mb-6 text-gray-100">Core Competencies</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="bg-cyan-600/50 text-cyan-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-cyan-400/50">Leadership & Management</span>
+                                <span class="bg-cyan-600/50 text-cyan-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-cyan-400/50">Strategic Planning & Execution</span>
+                                <span class="bg-cyan-600/50 text-cyan-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-cyan-400/50">Team Building & Cross-functional Leadership</span>
+                                <span class="bg-cyan-600/50 text-cyan-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-cyan-400/50">Startup Growth & Innovation Management</span>
+                                <span class="bg-cyan-600/50 text-cyan-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-cyan-400/50">Partnership & Collaboration Development </span>
+                                <span class="bg-cyan-600/50 text-cyan-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-cyan-400/50">Technology & Innovation</span>
+                                <span class="bg-cyan-600/50 text-cyan-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-cyan-400/50">Adaptability</span>
+                                <span class="bg-cyan-600/50 text-cyan-100 text-sm font-medium px-4 py-2 rounded-full shadow-md border border-cyan-400/50">Communication & Stakeholder Engagement</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="experience-panel" class="content-panel tilt-panel floating-panel p-6 md:p-8 bg-white/5 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-purple-300">Experience</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-6 border border-white/10">
+                            <h3 class="text-2xl font-semibold mb-1 text-white">Chief Executive Officer (CEO)
+Infyra Innovations LLP
+</h3>
+                            <p class="text-lg text-purple-300 mb-3"> <span class="text-gray-300 text-sm ml-2">(2023 - Present)</span></p>
+                            <ul class="list-disc list-inside text-gray-200 space-y-2 pl-2">
+                                <li>Leading Infyra Innovations with a mission to empower India’s agricultural sector through AI, IoT, and drone-based smart technologies.
+</li>
+                                <li>Heading the Kisan Drishti Project, an innovative solution that helps farmers with real-time insights, precision monitoring, and data-driven decisions.
+</li>
+                                <li>Signed a strategic MoU with IIT Ropar – TIF-AWaDH, securing incubation and financial support for agricultural technology development.
+</li>
+                                <li>Established long-term commercialization agreements with inventors and partners, strengthening Infyra’s IP and innovation ecosystem</li>
+                                <li>Driving product research, funding utilization, and technology integration to make Kisan Drishti a scalable national-level initiative.
+</li>
+<l1>
+Leading a dedicated team focused on product design, field testing, and market readiness.
+Event Participation & Leadership Experience
+</l1>
+                            </ul>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-6 border border-white/10">
+                            <h3 class="text-2xl font-semibold mb-1 text-white">Other Notable Experiences</h3>
+                            <p class="text-lg text-purple-300 mb-3"> <span class="text-gray-300 text-sm ml-2">
+
+</span></p>
+                            <ul class="list-disc list-inside text-gray-200 space-y-2 pl-2">
+                                <li>Startup India Innovation Week (2024) — Represented Infyra Innovations at the national event, showcasing Kisan Drishti to government officials and industry leaders.</li>
+                                <li>Anveshan 2023–24 (Research & Innovation Fair) — Presented research on hydrogen fuel technology for drones, recognized for innovation excellence.
+</li>
+<li> IIT Ropar – TIF-AWaDH Agreement (2025) — Signed a funding and incubation MoU for ₹3,00,000 grant and ₹1,00,000 loan support.
+</li>
+<li>Drone Innovation & Development Program (Galgotias, 2025) — Designed and led a 3-month hands-on training program focusing on R&D, DGCA licensing, and industry collaboration.
+</li>
+<li> Infyra–Inventors Commercialization Agreement (2025) — Structured a ₹2.5 crore, 12.5-year commercialization deal for Kisan Drishti technology.
+</li>
+<li>Infyra–IIT Ropar Collaboration (2025) — Strengthened agricultural technology initiatives under the TIF-AWaDH hub.</li >
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="education-panel" class="content-panel tilt-panel floating-panel p-6 md:p-8 bg-white/5 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-purple-300">Education</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-6 border border-white/10">
+                            <h3 class="text-2xl font-semibold mb-1 text-white">Bachelor of Technology in Computer Science Engineering</h3>
+                            <p class="text-lg text-purple-300 mb-2">Galgotias University</p>
+                            <p class="text-gray-300">Expected Graduation: 2026</p>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-6 border border-white/10">
+                            <h3 class="text-2xl font-semibold mb-1 text-white">Class 12th</h3>
+                            <p class="text-lg text-purple-300 mb-2">Government Inter College Bulandshahr</p>
+                            <p class="text-gray-300">2021-2022</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="achievements-panel" class="content-panel tilt-panel floating-panel p-6 md:p-8 bg-white/5 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-purple-300">Achievements</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-4 border border-white/10">
+                            <img src="3.jpg" alt="Event 1 Photo" class="w-full h-40 object-cover rounded-md mb-3">
+                            
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-4 border border-white/10">
+                            <img src="4.jpg" alt="Event 2 Photo" class="w-full h-40 object-cover rounded-md mb-3">
+                            <p class="text-center text-white font-medium"> </p>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-4 border border-white/10">
+                            <img src="5.jpg" alt="Event 3 Photo" class="w-full h-40 object-cover rounded-md mb-3">
+                            <p class="text-center text-white font-medium"></p>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-4 border border-white/10">
+                            <img src="grid-1.jpg" alt="Event 4 Photo" class="w-full h-40 object-cover rounded-md mb-3">
+                            <p class="text-center text-white font-medium"></p>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-4 border border-white/10">
+                            <img src="grid-2.jpg" alt="Event 5 Photo" class="w-full h-40 object-cover rounded-md mb-3">
+                            <p class="text-center text-white font-medium"></p>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-4 border border-white/10">
+                            <img src="grid-3.jpg" alt="Event 6 Photo" class="w-full h-40 object-cover rounded-md mb-3">
+                            <p class="text-center text-white font-medium"></p>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-4 border border-white/10">
+                            <img src="grid-5.jpg" alt="Event 7 Photo" class="w-full h-40 object-cover rounded-md mb-3">
+                            <p class="text-center text-white font-medium">  </p>
+                        </div>
+                        <div class="tilt-card bg-white/5 backdrop-blur-md rounded-lg shadow-xl p-4 border border-white/10">
+                            <img src="grid-6.jpg" alt="Event 8 Photo" class="w-full h-40 object-cover rounded-md mb-3">
+                            <p class="text-center text-white font-medium"></p>
+                        </div>
+                        
+                        </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initialize Lucide Icons
+            lucide.createIcons();
+
+            // === 2. FINAL FIXED Navigation Logic ===
+            const mainContentArea = document.querySelector('main');
+            const navButtons = document.querySelectorAll('.nav-button');
+            const desktopNavButtons = document.querySelectorAll('.desktop-nav-button');
+            const mobileNavButtons = document.querySelectorAll('.mobile-nav-button');
+            const contentPanels = document.querySelectorAll('.content-panel');
+
+            // --- A. Smooth Scroll on Click (FINAL FIX) ---
+            navButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPanelId = button.getAttribute('data-target');
+                    const targetPanel = document.getElementById(targetPanelId);
+
+                    if (targetPanel) {
+                        // Yeh browser ka built-in function hai.
+                        // Yeh automatically 'main' container ko scroll karega.
+                        targetPanel.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start' // Panel ke top par align karega
+                        });
+                    }
+                });
+            });
+
+            // --- B. ScrollSpy (Update Nav on Scroll) ---
+            // Yeh logic bilkul sahi hai aur ise change nahi karna hai
+            const observerOptions = {
+                root: mainContentArea, 
+                rootMargin: '-40% 0px -40% 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetPanelId = entry.target.id;
+                        
+                        // Update desktop buttons
+                        desktopNavButtons.forEach(btn => {
+                            btn.classList.remove('bg-purple-600', 'text-white');
+                            btn.classList.add('text-gray-400', 'hover:bg-white/10', 'hover:text-white');
+                            if (btn.getAttribute('data-target') === targetPanelId) {
+                                btn.classList.add('bg-purple-600', 'text-white');
+                                btn.classList.remove('text-gray-400', 'hover:bg-white/10', 'hover:text-white');
+                            }
+                        });
+
+                        // Update mobile buttons
+                        mobileNavButtons.forEach(btn => {
+                            btn.classList.remove('text-purple-400');
+                            btn.classList.add('text-gray-400');
+                            if (btn.getAttribute('data-target') === targetPanelId) {
+                                btn.classList.add('text-purple-400');
+                                btn.classList.remove('text-gray-400');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all content panels
+            contentPanels.forEach(panel => {
+                observer.observe(panel);
+            });
+
+
+            // 3. Contact Card Logic (Unchanged)
+            const contactButton = document.getElementById('contact-button');
+            const profilePic = document.getElementById('profile-pic');
+            const contactCard = document.getElementById('contact-card');
+            const closeContactCard = document.getElementById('close-contact-card');
+
+            const toggleContactCard = () => {
+                contactCard.classList.toggle('hidden');
+            };
+
+            contactButton.addEventListener('click', toggleContactCard);
+            profilePic.addEventListener('click', toggleContactCard);
+            closeContactCard.addEventListener('click', toggleContactCard);
+
+            // 4. 3D Tilt Effect Logic (Unchanged)
+            const initTilt = (element, options = { max: 10, perspective: 1000, scale: 1.03 }) => {
+                const { max, perspective, scale } = options;
+
+                element.addEventListener('mousemove', (e) => {
+                    const { left, top, width, height } = element.getBoundingClientRect();
+                    const x = (e.clientX - left - width / 2) / (width / 2);
+                    const y = (e.clientY - top - height / 2) / (height / 2);
+                    
+                    const rotateY = x * max;
+                    const rotateX = -y * max;
+                    
+                    element.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale}, ${scale}, ${scale})`;
+                    element.style.transition = 'transform 0.1s ease-out';
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    element.style.transform = `perspective(${perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    element.style.transition = 'transform 0.5s ease-in-out';
+                });
+            };
+
+            // Apply tilt effect to main panels
+            document.querySelectorAll('.tilt-panel').forEach(el => {
+                initTilt(el, { max: 5, perspective: 1500, scale: 1.02 });
+            });
+
+            // Apply tilt effect to inner cards
+            document.querySelectorAll('.tilt-card').forEach(el => {
+                initTilt(el, { max: 12, perspective: 800, scale: 1.04 });
+            });
+        });
+    </script>
+</body>
+</html>
